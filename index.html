@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>测试socket</title>
+</head>
+<body>
+<button onclick="temporary()">点击触发临时推送消息</button>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js">
+</script>
+<script>
+  var socket = io('http://localhost:8088');
+  socket.on('news', function (data) {
+    var elem = document.createElement("p");
+    elem.id = 'test' + data.idx;
+    elem.innerHTML = data.msg;
+	if (data.frontMsg) {
+      var elem1 = document.createElement("p");
+	  elem1.style = "color:red;";
+      elem1.innerHTML = "前端传过去的参数：" + data.frontMsg;
+      document.body.appendChild(elem1); 
+	}
+    document.body.appendChild(elem); 
+  });
+  function temporary (){
+    socket.emit('temporary msg', { params: '前端参数' });
+  }
+</script>
+</html>
