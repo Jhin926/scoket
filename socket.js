@@ -26,7 +26,7 @@ io.on('connection', function (socket) {
   setInterval(() => {
 	num++;
     socket.emit('news', {
-	  msg: `这是第${num}次推送消息`,
+	  msg: `这是第${num}次推送消息(新电脑骚一波)`,
 	  idx: num
 	});
   }, 3000);
